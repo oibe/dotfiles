@@ -5,7 +5,6 @@ filetype off
 call pathogen#helptags()
 syntax on " syntax highlighting
 filetype plugin indent on
-
 " ==============
 " : Whitespace :
 " ==============
@@ -22,7 +21,6 @@ set tabstop=4               " makes # of spaces = 8 for preexisitng tab
 au! BufRead,BufNewFile *.json set filetype=json 
 
 
-autocmd BufWritePre *.py :%s/\s\+$//e " remove trailing white space on save
 augroup json_autocmd 
   autocmd! 
   autocmd FileType json set autoindent 
@@ -106,7 +104,6 @@ endif
 set list listchars=tab:».,trail:.
 hi NonText ctermfg=7 guifg=gray
 
-let g:syntastic_python_checkers=['pylint', 'flake8']
 
 " Swap window locations
 function! MarkWindowSwap()
@@ -130,3 +127,16 @@ endfunction
 
 nmap <silent> <leader>mw :call MarkWindowSwap()<CR>
 nmap <silent> <leader>pw :call DoWindowSwap()<CR>
+
+""""""""""""""""
+"    RUBY    "
+""""""""""""""""
+autocmd FileType ruby colorscheme badwolf
+autocmd BufWritePre *.rb :%s/\s\+$//e " remove trailing white space on save
+let g:syntastic_ruby_checkers=['rubocop', 'mri']
+
+""""""""""""""""
+"    PYTHON    "
+""""""""""""""""
+autocmd BufWritePre *.py :%s/\s\+$//e " remove trailing white space on save
+let g:syntastic_python_checkers=['pylint', 'flake8']

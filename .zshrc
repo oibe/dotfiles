@@ -45,18 +45,16 @@ ZSH_THEME="sporty_256"
 plugins=(git)
 
 # Customize to your needs...
-export PATH=$PATH:/Users/Onwukike/.rvm/bin:/usr/local/bin:/usr/local/Cellar/ruby/1.9.3-p194/bin:/Users/Onwukike/.rvm/gems/ruby-1.9.3-p448/bin:/Users/Onwukike/.rvm/gems/ruby-1.9.3-p448@global/bin:/Users/Onwukike/.rvm/rubies/ruby-1.9.3-p448/bin:/Users/Onwukike/.rvm/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/Users/Onwukike/.rvm/bin:/Users/Onwukike/.rvm/bin
 
 export INPUTRC="~/.inputrc"
 
 export CLICOLOR=1
 export TERM=xterm-256color
 export LSCOLORS="gxGxBxDxcxEgEdxbxgxcxd"
-export PATH=$HOME/.rvm/bin:/usr/local/bin:$PATH # Add RVM to PATH for scripting
 
 #export PYTHONPATH="$PYTHONPATH:/usr/local/lib/python2.7/site-packages/"
 #export PYTHONPATH="$PYTHONPATH:/Users/Onwukike/Magnetic"
-#export PYTHONPATH="$PYTHONPATH:/Users/Onwukike/Magnetic/thidwick/"
+export PYTHONPATH="$PYTHONPATH:/Users/Onwukike/Magnetic/thidwick/"
 #export PYTHONPATH="$PYTHONPATH:/Users/Onwukike/Magnetic/horton"
 #export PYTHONPATH="$PYTHONPATH:/Users/Onwukike/Magnetic/qwobl/lib/python/"
 
@@ -71,6 +69,10 @@ alias crr="codereview --reviewers "
 alias cri="codereview --issue"
 alias pypath="env | grep PYTHONPATH"
 alias recent="ls -lrt | tail"
+alias horton="cd ~/Magnetic/horton"
+alias qwobl="cd ~/Magnetic/qwobl"
+alias railsui="cd ~/Magnetic/rails-ui"
+alias chefrepo="cd ~/Magnetic/chef-repo"
 
 # Helps to speed up auto completion for zsh
 zstyle ":completion:*" accept-exact "*(N)"

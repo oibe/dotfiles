@@ -51,28 +51,20 @@ export INPUTRC="~/.inputrc"
 export CLICOLOR=1
 export TERM=xterm-256color
 export LSCOLORS="gxGxBxDxcxEgEdxbxgxcxd"
-
+export PATH="/usr/local/bin:$PATH"
 #export PYTHONPATH="$PYTHONPATH:/usr/local/lib/python2.7/site-packages/"
 #export PYTHONPATH="$PYTHONPATH:/Users/Onwukike/Magnetic"
 export PYTHONPATH="$PYTHONPATH:/Users/Onwukike/Magnetic/thidwick/"
 #export PYTHONPATH="$PYTHONPATH:/Users/Onwukike/Magnetic/horton"
 #export PYTHONPATH="$PYTHONPATH:/Users/Onwukike/Magnetic/qwobl/lib/python/"
 
-export WORKON_HOME=$HOME/virtualenvs
-export PROJECT_HOME=$HOME/Magnetic/current
+export WORKON_HOME=$HOME/.virtualenvs
 export VIRTUALENV_USE_SETUPTOOLS=true
 export PIP_VIRTUALENV_BASE=$WORKON_HOME
-source virtualenvwrapper_lazy.sh
+source /Library/Frameworks/Python.framework/Versions/2.7/bin/virtualenvwrapper.sh
 
-alias cr="codereview"
-alias crr="codereview --reviewers "
-alias cri="codereview --issue"
 alias pypath="env | grep PYTHONPATH"
 alias recent="ls -lrt | tail"
-alias horton="cd ~/Magnetic/horton"
-alias qwobl="cd ~/Magnetic/qwobl"
-alias railsui="cd ~/Magnetic/rails-ui"
-alias chefrepo="cd ~/Magnetic/chef-repo"
 
 # Helps to speed up auto completion for zsh
 zstyle ":completion:*" accept-exact "*(N)"

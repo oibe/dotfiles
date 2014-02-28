@@ -41,8 +41,11 @@ map <S-k> <c-w>k
 map <S-l> <c-w>l
 map <S-h> <c-w>h
 
+" because :qa hurts my pinky
+map mm <Esc>:qa<Return>
 
 map <leader>td <Plug>TaskList
+map <leader>s :SyntasticToggleMode<CR>
 
 "Syntax Highligting and Validation
 
@@ -140,3 +143,18 @@ let g:syntastic_ruby_checkers=['rubocop', 'mri']
 """"""""""""""""
 autocmd BufWritePre *.py :%s/\s\+$//e " remove trailing white space on save
 let g:syntastic_python_checkers=['pylint', 'flake8']
+
+""""""""""""""""
+"     JSON     "
+""""""""""""""""
+au! BufRead,BufNewFile *.json set filetype=json
+
+augroup json_autocmd 
+    autocmd! 
+    autocmd FileType json set autoindent 
+    autocmd FileType json set formatoptions=tcq2l 
+    autocmd FileType json set textwidth=78 shiftwidth=2 
+    autocmd FileType json set softtabstop=2 tabstop=8 
+    autocmd FileType json set expandtab 
+    autocmd FileType json set foldmethod=syntax 
+augroup END

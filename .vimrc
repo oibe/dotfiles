@@ -1,16 +1,37 @@
-
-" Needed for pathogen must be off when you run certain commands
-call pathogen#infect()
+set nocompatible
 filetype off
-call pathogen#helptags()
+
+set rtp+=~/.vim/bundle/vundle
+call vundle#rc()
+cal pathogen#infect()
+
+Bundle 'gmarik/vundle'
+
+Bundle 'tpope/vim-pathogen'
+Bundle 'davidhalter/jedi-vim'
+Bundle 'fholgado/minibufexpl.vim'
+Bundle 'scrooloose/nerdtree'
+Bundle 'scrooloose/syntastic'
+Bundle 'ervandew/supertab'
+Bundle 'nvie/vim-flake8'
+Bundle 'tpope/vim-fugitive'
+Bundle 'nathanaelkane/vim-indent-guides'
+Bundle 'elzr/vim-json'
+Bundle 'kevinw/pyflakes'
+Bundle 'kien/ctrlp.vim'
+
+filetyp plugin indent on " required
+
+set mouse=a
+nmap <leader>ne :NERDTree<cr>
+
 syntax on " syntax highlighting
-filetype plugin indent on
 " ==============
 " : Whitespace :
 " ==============
 "
 set autoindent
-"
+
 set expandtab               " insert space instead of tab
 set shiftround              " rounds indent to a multiple of shiftwidth
 set shiftwidth=4            " makes # of spaces = 4 for new tab
@@ -41,13 +62,35 @@ map <S-k> <c-w>k
 map <S-l> <c-w>l
 map <S-h> <c-w>h
 
+" No arrow keys :)
+map <up> <nop>
+map <down> <nop>
+map <left> <nop>
+map <right> <nop>
+
 " because :qa hurts my pinky
 map mm <Esc>:qa<Return>
 
 map <leader>td <Plug>TaskList
-map <leader>s :SyntasticToggleMode<CR>
 
-"Syntax Highligting and Validation
+" Syntastic Config
+map <leader>s :SyntasticToggleMode<CR>
+let g:syntastic_always_populate_loc_list=1
+
+" Ctrlp Config
+let g:ctrlp_map = '<\-t>'
+let g:ctrlp_cmt = 'CtrlP'
+let g:ctrlp_working_path_mode = 2          " CtrlP: use the nearest ancestor that contains one of these directories or files: .git/ .hg/ .svn/ .bzr/ _darcs/
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip   " MacOSX/Linux
+let g:ctrlp_custom_ignore = {
+    \ 'dir': '\.git$\|\.hg$\|\.svn$\|node_modules',
+    \ 'file': '\.pyc$\|\.pyo$\|\.rbc$|\.rbo$\|\.class$\|\.o$\|\~$\|\.DS_Store',
+    \ 'link': 'some_bad_symbolic_links',
+    \ }
+let g:ctrlp_follow_symlinks = 1
+
+
+"Syntax  Highligting and Validation
 
 let g:pyflakes_use_quickfix = 0
 
@@ -130,6 +173,24 @@ endfunction
 
 nmap <silent> <leader>mw :call MarkWindowSwap()<CR>
 nmap <silent> <leader>pw :call DoWindowSwap()<CR>
+
+" Supertab
+let g:SuperTabDefaultCompletionType = "context"
+
+" Jedi
+let g:jedi#popup_on_dot = 0
+
+" Indent guides
+set ts=4 sw=4 et
+let g:indent_guides_start_level = 2
+let g:indent_guides_guide_size = 1
+let g:indent_guides_auto_colors = 0
+let g:indent_guides_enable_on_vim_startup = 0
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=black   ctermbg=darkgrey
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=darkgrey ctermbg=darkgrey
+"inoremap <CR> <CR>x<BS>
+"nnoremap o ox<BS>
+"nnoremap O Ox<BS>
 
 """"""""""""""""
 "    RUBY    "

@@ -9,6 +9,7 @@ ZSH=$HOME/.oh-my-zsh
 #ZSH_THEME="robbyrussell"
 ZSH_THEME="sporty_256"
 
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
@@ -42,7 +43,7 @@ ZSH_THEME="sporty_256"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git)
+plugins=(git rvm)
 
 # Customize to your needs...
 
@@ -64,12 +65,16 @@ export PIP_VIRTUALENV_BASE=$WORKON_HOME
 source /Library/Frameworks/Python.framework/Versions/2.7/bin/virtualenvwrapper.sh
 
 alias pypath="env | grep PYTHONPATH"
+alias path="echo $PATH"
 alias recent="ls -lrt | tail"
+alias cleanpyc="find . -name '*.pyc' -exec rm -rf {} \;"
 
 # Helps to speed up auto completion for zsh
 zstyle ":completion:*" accept-exact "*(N)"
 zstyle ":completion:*" use-cache on
 zstyle ":completion:*" cache-path !/.zsh/cache
 
+PATH=$HOME/.rvm/bin:$PATH # Add RVM to PATH for scripting
 source $ZSH/oh-my-zsh.sh
+
 

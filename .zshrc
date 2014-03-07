@@ -60,6 +60,8 @@ export PYTHONPATH="$PYTHONPATH:/Users/Onwukike/Magnetic/thidwick/"
 #export PYTHONPATH="$PYTHONPATH:/Users/Onwukike/Magnetic/qwobl/lib/python/"
 
 export WORKON_HOME=$HOME/.virtualenvs
+export JAVA_HOME=`/usr/libexec/java_home -v 1.7`
+export ECLIPSE_HOME=$HOME/.eclipse
 export VIRTUALENV_USE_SETUPTOOLS=true
 export PIP_VIRTUALENV_BASE=$WORKON_HOME
 source /Library/Frameworks/Python.framework/Versions/2.7/bin/virtualenvwrapper.sh
@@ -68,6 +70,15 @@ alias pypath="env | grep PYTHONPATH"
 alias path="echo $PATH"
 alias recent="ls -lrt | tail"
 alias cleanpyc="find . -name '*.pyc' -exec rm -rf {} \;"
+alias vimrc="vim ~/.vimrc"
+alias zrc="vim ~/.zshrc"
+alias ctags="/usr/local/Cellar/ctags/5.8/bin/ctags"
+
+
+#Kerrit sub coomands
+alias kpc="kerrit projects clone"
+alias kpl="kerrit projects list"
+alias krs="kerrit reviews send"
 
 # Helps to speed up auto completion for zsh
 zstyle ":completion:*" accept-exact "*(N)"

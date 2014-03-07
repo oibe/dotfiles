@@ -3,11 +3,9 @@ filetype off
 
 set rtp+=~/.vim/bundle/vundle
 call vundle#rc()
-cal pathogen#infect()
 
 Bundle 'gmarik/vundle'
 
-Bundle 'tpope/vim-pathogen'
 Bundle 'davidhalter/jedi-vim'
 Bundle 'fholgado/minibufexpl.vim'
 Bundle 'scrooloose/nerdtree'
@@ -19,11 +17,20 @@ Bundle 'nathanaelkane/vim-indent-guides'
 Bundle 'elzr/vim-json'
 Bundle 'kevinw/pyflakes'
 Bundle 'kien/ctrlp.vim'
+Bundle 'SirVer/ultisnips'
+Bundle 'vim-scripts/taglist.vim'
+Bundle 'Lokaltog/vim-easymotion'
+Bundle 'mileszs/ack.vim'
+
+" Snippets are separated from the engine. Add this if you want them:
+Bundle 'honza/vim-snippets'
 
 filetyp plugin indent on " required
 
 set mouse=a
 nmap <leader>ne :NERDTree<cr>
+
+let Tlist_Ctags_Cmd = "/usr/local/Cellar/ctags/5.8/bin/ctags"
 
 syntax on " syntax highlighting
 " ==============
@@ -71,19 +78,27 @@ map <right> <nop>
 " because :qa hurts my pinky
 map mm <Esc>:qa<Return>
 
-map <leader>td <Plug>TaskList
+map <leader>tl :TlistToggle<CR>
+
+" Ultinsips Config
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsListSnippets="<S-tab>"
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
 
 " Syntastic Config
 map <leader>s :SyntasticToggleMode<CR>
 let g:syntastic_always_populate_loc_list=1
 
 " Ctrlp Config
-let g:ctrlp_map = '<\-t>'
+let g:ctrlp_map = '<S-p>'
 let g:ctrlp_cmt = 'CtrlP'
 let g:ctrlp_working_path_mode = 2          " CtrlP: use the nearest ancestor that contains one of these directories or files: .git/ .hg/ .svn/ .bzr/ _darcs/
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip   " MacOSX/Linux
 let g:ctrlp_custom_ignore = {
-    \ 'dir': '\.git$\|\.hg$\|\.svn$\|node_modules',
+    \ 'dir': '\.hg$\|\.svn$\|node_modules',
     \ 'file': '\.pyc$\|\.pyo$\|\.rbc$|\.rbo$\|\.class$\|\.o$\|\~$\|\.DS_Store',
     \ 'link': 'some_bad_symbolic_links',
     \ }
@@ -116,7 +131,9 @@ set smartindent
 set hlsearch
 autocmd BufWritePre *.py :%s/\s\+$//e
 hi Search guibg=LightBlue
-colorscheme vividchalk
+" colorscheme vividchalk
+colorscheme molokai
+
 hi Search cterm=NONE ctermfg=black ctermbg=yellow
 
 " Case sensitivity
@@ -204,6 +221,12 @@ let g:syntastic_ruby_checkers=['rubocop', 'mri']
 """"""""""""""""
 autocmd BufWritePre *.py :%s/\s\+$//e " remove trailing white space on save
 let g:syntastic_python_checkers=['pylint', 'flake8']
+
+""""""""""""""""
+"    Java      "
+""""""""""""""""
+autocmd FileType java colorscheme molokai
+autocmd BufWritePre *.java :%s/\s\+$//e " remove trailing white space on save
 
 """"""""""""""""
 "     JSON     "

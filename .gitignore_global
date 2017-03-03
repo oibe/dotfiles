@@ -1,7 +1,0 @@
-*.pyc
-vm/.vagrant
-vm/Berksfile.lock
-.DS_Store
-.coverage
-cleanup.sh
-*_trial_temp*

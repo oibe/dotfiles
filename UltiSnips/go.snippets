@@ -1,0 +1,88 @@
+snippet anon_struct_list "A list of anonymous structs"
+options := []struct {
+	operation      string
+	expectedString string
+	expected       error
+}{
+	{"operation1", "expected-string", errors.New("some error message")},
+	{"operation2", "expected-string", nil},
+}
+endsnippet
+
+snippet httptest:handler
+${1:// Create a request object with method, url, and parms }
+req, err := http.NewRequest("GET", "/api/projects", nil)
+if err != nil {
+	t.Fatal(err)
+}
+rr := httptest.NewRecorder()
+
+${2:// anonymous function has http.HandlerFunc signature }
+handler := http.HandlerFunc(func (w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "hello world")
+})
+handler.ServeHTTP(rr, req)
+
+if status := rr.Code; status != http.StatusOK {
+	t.Errorf("handler returned wrong status code: got %v want %v",
+		status, http.StatusOK)
+}
+endsnippet
+
+snippet map:exist "If key in map"
+if ${1:val}, ok := ${2:dict}["foo"]; ok {
+    //do something here
+}
+endsnippet
+
+snippet test:func "a testing function signature"
+func ${1:TestSomeMethodName}(t *testing.T) {
+}
+endsnippet
+
+snippet time:local "Get the local time then convert to an int"
+todayDate := time.Now().Local()
+todayDateStr := todayDate.Format("20060102")
+date, err := strconv.Atoi(todayDateStr)
+endsnippet
+
+snippet sort:struct "Sort a list of structs"
+type ${1:slice_of_type_to_sort} []${2:type_to_sort}
+
+// Len gives the length of $1
+func (${3:slice} $1) Len() int {
+	return len($3)
+}
+
+// Less a comparison operator to be implemented on struct of type $2
+func ($3 $1) Less(i, j int) bool {
+	return $3[i].${5:Field} < $3[j].$5
+}
+
+// Swap switches the position of 2 structs of type $2
+func ($3 $1) Swap(i, j int) {
+	$3[i], $3[j] = $3[j], $3[i]
+}
+
+${4:
+/*
+some_list := $1{
+	{Name: "d"},
+	{Name: "e"},
+	{Name: "b"},
+	{Name: "a"},
+}
+sort.Sort(some_list)
+*/
+}
+endsnippet
+
+snippet map:values "Get values from a map"
+${1:collection} := make([]${2:type}, len(${3:map}))
+idx := 0
+for _, val := range $3 {
+	$1[idx] = val
+	idx++
+}
+endsnippet
+

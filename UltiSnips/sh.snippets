@@ -1,0 +1,3 @@
+snippet ssh_tunnel "ssh tunneling"
+ssh -nNL ${1:local_port}:${2:localhost}:${3:remote_port} ${4:remote_host}
+endsnippet

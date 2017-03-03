@@ -1,38 +1,160 @@
 set nocompatible
 filetype off
 
-set rtp+=~/.vim/bundle/vundle
-call vundle#rc()
 
-Bundle 'gmarik/vundle'
+" Note: Skip initialization for vim-tiny or vim-small.
+if !1 | finish | endif
 
-Bundle 'davidhalter/jedi-vim'
-Bundle 'fholgado/minibufexpl.vim'
-Bundle 'scrooloose/nerdtree'
-Bundle 'scrooloose/syntastic'
-Bundle 'ervandew/supertab'
-Bundle 'nvie/vim-flake8'
-Bundle 'tpope/vim-fugitive'
-Bundle 'nathanaelkane/vim-indent-guides'
-Bundle 'elzr/vim-json'
-Bundle 'kevinw/pyflakes'
-Bundle 'kien/ctrlp.vim'
-Bundle 'SirVer/ultisnips'
-Bundle 'vim-scripts/taglist.vim'
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'mileszs/ack.vim'
+if has('vim_starting')
+if &compatible
+    set nocompatible               " Be iMproved
+endif
+
+" ==============
+" : NeoBundle  :
+" ==============
+
+" Required:
+set runtimepath+=~/.vim/bundle/neobundle.vim/
+endif
+
+" Required:
+call neobundle#begin(expand('~/.vim/bundle/'))
+
+set autoindent
+" Let NeoBundle manage NeoBundle
+" Required:
+NeoBundleFetch 'Shougo/neobundle.vim'
+
+" My Bundles here:
+NeoBundle 'Valloric/YouCompleteMe', {
+     \ 'build' : {
+     \     'mac' : './install.sh --clang-completer --system-libclang --omnisharp-completer',
+     \     'unix' : './install.sh --clang-completer --system-libclang --omnisharp-completer',
+     \     'windows' : './install.sh --clang-completer --system-libclang --omnisharp-completer',
+     \     'cygwin' : './install.sh --clang-completer --system-libclang --omnisharp-completer'
+     \    }
+     \ }
+NeoBundle 'fholgado/minibufexpl.vim'
+NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'scrooloose/syntastic'
+NeoBundle 'andviro/flake8-vim'
+NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'nathanaelkane/vim-indent-guides'
+NeoBundle 'elzr/vim-json'
+NeoBundle 'kevinw/pyflakes'
+NeoBundle 'kien/ctrlp.vim'
+NeoBundle 'SirVer/ultisnips'
+NeoBundle 'vim-scripts/taglist.vim'
+NeoBundle 'Lokaltog/vim-easymotion'
+NeoBundle 'Lokaltog/vim-powerline'
+NeoBundle 'Lokaltog/powerline-fonts'
+NeoBundle 'bling/vim-airline'
+NeoBundle 'jwhitley/vim-matchit'
+NeoBundle 'faith/vim-go'
+NeoBundle 'vim-scripts/Tagbar'
+NeoBundle 'rking/ag.vim'
+NeoBundle 'derekwyatt/vim-scala'
 
 " Snippets are separated from the engine. Add this if you want them:
-Bundle 'honza/vim-snippets'
+NeoBundle 'honza/vim-snippets'
+" Refer to |:NeoBundle-examples|.
+" Note: You don't set neobundle setting in .gvimrc!
+
+call neobundle#end()
+
+" Required:
+filetype plugin indent on
+
+" If there are uninstalled bundles found on startup,
+" this will conveniently prompt you to install them.
+NeoBundleCheck
+
+
+if has("gui_running")
+    let s:uname = system("uname")
+    if s:uname == "Darwin\n"
+        set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h14
+    endif
+endif
+""" FOR STATUSLINE
+set t_Co=256
+set encoding=utf-8 " Necessary to show Unicode glyphs
+let g:Powerline_symbols = 'fancy'
+set rtp+=/Users/nate/Library/Python/2.7/lib/python/site-packages/powerline/bindings/vim
+set nocompatible   " Disable vi-compatibility
+set laststatus=2   " Always show the statusline
+" For powerline font in MacVim
+set guifont=Menlo\ For\ Powerline
+set fillchars+=stl:\ ,stlnc:\
 
 filetyp plugin indent on " required
 
-set mouse=a
-nmap <leader>ne :NERDTree<cr>
+""" GENERAL VIM mappings
+
+" Scroll between windows using <ctrl><direction>
+map <C-j> <c-w>j
+map <C-k> <c-w>k
+map <C-l> <c-w>l
+map <C-h> <c-w>h
+
+" No arrow keys :)
+map <up> <nop>
+map <down> <nop>
+map <left> <nop>
+map <right> <nop>
+
+" because :qa hurts my pinky
+map mm <Esc>:qa<Return>
+
+map <leader>tl :TlistToggle<CR>
+
+" saves by hitting s in command mode
+nmap s :w<cr>
+
+" When I hit y in visual-mode it copies to the system buffer
+vmap y :w !pbcopy<CR><CR>
+
+" =================
+" : YouCompleteMe :
+" =================
+
+let g:ycm_key_list_select_completion = ['<C-j>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-k>', '<Up>']
+let g:ycm_key_list_accept_completion = ['<C-y>']
+
+
+" =============
+" : Ultisnips :
+" =============
+
+" hotkey mappings
+nmap <leader>e :UltiSnipsEdit<cr>
+
+let g:UltiSnipsSnippetDirectories = ['~/.vim/UltiSnips', 'UltiSnips']
+let g:UltiSnipsExpandTrigger="<Tab>"
+let g:UltiSnipsJumpForwardTrigger="<Tab>"
+let g:UltiSnipsJumpBackwardTrigger="<S-Tab>"
+let g:UltiSnipsListSnippets="<S-Tab>"
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
+" ==============
+" : NERDTree   :
+" ==============
+
+nmap <leader>nt :NERDTree<cr>
+nmap ,n :NERDTreeFind<CR>
+
+" ==============
+" :     AG     :
+" ==============
+
+map // :Ag 
 
 let Tlist_Ctags_Cmd = "/usr/local/Cellar/ctags/5.8/bin/ctags"
 
-syntax on " syntax highlighting
+
 " ==============
 " : Whitespace :
 " ==============
@@ -46,7 +168,7 @@ set softtabstop=4           " makes the spaces feel like tab
 set tabstop=4               " makes # of spaces = 8 for preexisitng tab
 "
 
-au! BufRead,BufNewFile *.json set filetype=json 
+au! BufRead,BufNewFile *.json set filetype=json
 
 
 augroup json_autocmd 
@@ -63,34 +185,16 @@ augroup END
 set foldmethod=indent
 set foldlevel=99
 
-" Scroll between windows using <ctrl><direction>
-map <S-j> <c-w>j
-map <S-k> <c-w>k
-map <S-l> <c-w>l
-map <S-h> <c-w>h
-
-" No arrow keys :)
-map <up> <nop>
-map <down> <nop>
-map <left> <nop>
-map <right> <nop>
-
-" because :qa hurts my pinky
-map mm <Esc>:qa<Return>
-
-map <leader>tl :TlistToggle<CR>
-
-" Ultinsips Config
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-let g:UltiSnipsListSnippets="<S-tab>"
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
-
 " Syntastic Config
 map <leader>s :SyntasticToggleMode<CR>
-let g:syntastic_always_populate_loc_list=1
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 0
 
 " Ctrlp Config
 let g:ctrlp_map = '<S-p>'
@@ -107,15 +211,15 @@ let g:ctrlp_follow_symlinks = 1
 
 "Syntax  Highligting and Validation
 
-let g:pyflakes_use_quickfix = 0
-
+let g:PyFlakeMaxLineLength = 100
 " Pep-8 checking
-autocmd FileType python map <leader>8 :call Flake8()<CR>
+"autocmd FileType python map <leader>8 :call Flake8()<CR>
 let g:flake8_max_line_length=120
-let g:flake8_ignore="E501,E128" " Ignore lines too long, and continuation line under-indented for visual indent 
-let g:PyFlakeDefaultComplexity=10
-let g:PyFlakeOnWrite = 1 
-let g:PyFlakeSigns = 1
+"let g:flake8_ignore="E501,E128" " Ignore lines too long, and continuation line under-indented for visual indent 
+"let g:PyFlakeDefaultComplexity=10
+"let g:PyFlakeOnWrite = 1 
+"let g:PyFlakeSigns = 1
+
 "Auto complete stuff for SuperTab
 " au FileType python set omnifunc=pythoncomplete#Complete
 " let g:SuperTabDefaultCompletionType = "context"
@@ -188,6 +292,7 @@ function! DoWindowSwap()
     exe 'hide buf' markedBuf 
 endfunction
 
+
 nmap <silent> <leader>mw :call MarkWindowSwap()<CR>
 nmap <silent> <leader>pw :call DoWindowSwap()<CR>
 
@@ -209,6 +314,17 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=darkgrey ctermbg=darkg
 "nnoremap o ox<BS>
 "nnoremap O Ox<BS>
 
+
+" ==============
+" : LANGUAGES  :
+" ==============
+syntax on " syntax highlighting
+
+" ==============
+" :   GOLANG   :
+" ==============
+let g:syntastic_go_checkers = ['govet', 'errcheck', 'go']
+
 """"""""""""""""
 "    RUBY    "
 """"""""""""""""
@@ -227,6 +343,12 @@ let g:syntastic_python_checkers=['pylint', 'flake8']
 """"""""""""""""
 autocmd FileType java colorscheme molokai
 autocmd BufWritePre *.java :%s/\s\+$//e " remove trailing white space on save
+"let g:syntastic_java_javac_executable=['Java']
+
+""""""""""""""""""""""
+"     Javascript     "
+""""""""""""""""""""""
+let g:syntastic_javascript_checkers = ['eslint']
 
 """"""""""""""""
 "     JSON     "
@@ -242,3 +364,68 @@ augroup json_autocmd
     autocmd FileType json set expandtab 
     autocmd FileType json set foldmethod=syntax 
 augroup END
+
+nnoremap ,b :TagbarToggle<CR>
+let g:tagbar_type_go = {
+    \ 'ctagstype' : 'go',
+    \ 'kinds'     : [
+        \ 'p:package',
+        \ 'i:imports:1',
+        \ 'c:constants',
+        \ 'v:variables',
+        \ 't:types',
+        \ 'n:interfaces',
+        \ 'w:fields',
+        \ 'e:embedded',
+        \ 'm:methods',
+        \ 'r:constructor',
+        \ 'f:functions'
+    \ ],
+    \ 'sro' : '.',
+    \ 'kind2scope' : {
+        \ 't' : 'ctype',
+        \ 'n' : 'ntype'
+    \ },
+    \ 'scope2kind' : {
+        \ 'ctype' : 't',
+        \ 'ntype' : 'n'
+    \ },
+    \ 'ctagsbin'  : 'gotags',
+    \ 'ctagsargs' : '-sort -silent'
+    \ }
+
+" so vim stops complaining when opening a file that another vim has opened.
+" I know vim, just go read only. Obviously.
+func CheckSwap()
+  swapname
+  if v:statusmsg =~ '\.sw[^p]$'
+    set ro
+  endif
+endfunc
+if &swf
+  set shm+=A
+  au BufReadPre * call CheckSwap()
+endi
+
+" so a diff between two files does not force a 'press a key to continue prompt'
+if &diff
+  set cmdheight=2
+endi
+
+" Backspace 
+set backspace=indent,eol,start
+
+" Commenting blocks of code.
+" ,cc to comment a line
+" ,cu to uncomment a line
+"augroup comment_autocmd 
+"    autocmd FileType c,cpp,java,scala let b:comment_leader = '// '
+"    autocmd FileType sh,ruby,python   let b:comment_leader = '# '
+"    autocmd FileType conf,fstab       let b:comment_leader = '# '
+"    autocmd FileType tex              let b:comment_leader = '% '
+"    autocmd FileType mail             let b:comment_leader = '> '
+"    autocmd FileType vim              let b:comment_leader = '" '
+"    noremap <silent> ,cc :<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch<CR>
+    "noremap <silent> ,cu :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>
+" augroup END
+"

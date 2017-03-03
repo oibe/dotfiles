@@ -1,0 +1,65 @@
+snippet ifunc "instance function"
+
+def ${1:function_name}(self):
+	${2:pass}
+endsnippet
+
+snippet decorator:cache "A @cache decorator for instance methods"
+class cache(object):
+
+    """
+    This cache is expected to be used on
+    instance methods on a given class.
+    """
+
+    def __init__(self, func):
+        self.func = func
+        self._cache = {}
+
+    def __get__(self, obj, objtype=None):
+        # get works because this class is inherited from object
+        if obj is None:
+            return self.func
+        return partial(self, obj)
+
+    def __call__(self, *args, **kw):
+        obj = args[0]
+        try:
+            cache = obj.__cache
+        except AttributeError:
+            cache = obj.__cache = {}
+        key = (self.func, args[1:], frozenset(kw.items()))
+        try:
+            res = cache[key]
+        except KeyError:
+            res = cache[key] = self.func(*args, **kw)
+        return res
+endsnippet
+
+snippet util:json:slice "Grabs the specified fields from json"
+def _slice_json(self, entity, target_fields):
+	"""
+	Grabs a section of the json we are interested in.
+	If a requested field does not exist we grab everything that does,
+	and return a result without the non-existant field.
+	:entity {dict}: - a dictionary that represents a json object
+	:target_fields {list dict|string}: - a list of fields to extract.  If the
+	field is a dictionary instead of a string then we recurse on the entity
+	and the target dict field in order to parse nested entity fields.
+	:return: - a dictionary that represents a json slice of the requested fields
+	"""
+	sub_entity = {}
+	if not entity and not target_fields:
+		return sub_entity
+
+	for field in target_fields:
+		if isinstance(field, str):
+			if field in entity:
+				sub_entity[field] = entity[field]
+		elif isinstance(field, dict):
+			for nested_field, values in field.iteritems():
+				sub_entity[nested_field] = self._slice_json(entity[nested_field], values)
+		else:
+			raise TypeError('Received type that is neither string nor dictionary')
+	return sub_entity
+endsnippet

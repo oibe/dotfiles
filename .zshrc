@@ -1,91 +1,265 @@
-# Path to your oh-my-zsh configuration.
-ZSH=$HOME/.oh-my-zsh
+# Path to your oh-my-zsh installation.
+export ZSH=/Users/onwukikeibe/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-#ZSH_THEME="bira"
-#ZSH_THEME="robbyrussell"
+#
+
+ulimit -n 2560
 ZSH_THEME="sporty_256"
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+bindkey -v
 
-# Set to this to use case-sensitive completion
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+
+export LC_CTYPE=C
+export LANG=C
+export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
+# Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
-# Uncomment this to disable bi-weekly auto-update checks
+# Uncomment the following line to disable bi-weekly auto-update checks.
 # DISABLE_AUTO_UPDATE="true"
 
-# Uncomment to change how often before auto-updates occur? (in days)
+# Uncomment the following line to change how often to auto-update (in days).
 # export UPDATE_ZSH_DAYS=13
 
-# Uncomment following line if you want to disable colors in ls
+# Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
 
-# Uncomment following line if you want to disable autosetting terminal title.
+# Uncomment the following line to disable auto-setting terminal title.
 # DISABLE_AUTO_TITLE="true"
 
-# Uncomment following line if you want to disable command autocorrection
-# DISABLE_CORRECTION="true"
+# Uncomment the following line to enable command auto-correction.
+# ENABLE_CORRECTION="true"
 
-# Uncomment following line if you want red dots to be displayed while waiting for completion
+# Uncomment the following line to display red dots whilst waiting for completion.
 # COMPLETION_WAITING_DOTS="true"
 
-# Uncomment following line if you want to disable marking untracked files under
-# VCS as dirty. This makes repository status check for large repositories much,
-# much faster.
+# Uncomment the following line if you want to disable marking untracked files
+# under VCS as dirty. This makes repository status check for large repositories
+# much, much faster.
 # DISABLE_UNTRACKED_FILES_DIRTY="true"
+
+# Uncomment the following line if you want to change the command execution time
+# stamp shown in the history command output.
+# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# HIST_STAMPS="mm/dd/yyyy"
+
+# Would you like to use another custom folder than $ZSH/custom?
+# ZSH_CUSTOM=/path/to/new-custom-folder
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git rvm)
+# Add wisely, as too many plugins slow down shell startup.
+plugins=(git)
 
-# Customize to your needs...
+# User configuration
 
-export INPUTRC="~/.inputrc"
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+# export MANPATH="/usr/local/man:$MANPATH"
 
-export CLICOLOR=1
-export TERM=xterm-256color
-export LSCOLORS="gxGxBxDxcxEgEdxbxgxcxd"
-export PATH="/usr/local/bin:$PATH"
-#export PYTHONPATH="$PYTHONPATH:/usr/local/lib/python2.7/site-packages/"
-#export PYTHONPATH="$PYTHONPATH:/Users/Onwukike/Magnetic"
-export PYTHONPATH="$PYTHONPATH:/Users/Onwukike/Magnetic/thidwick/"
-#export PYTHONPATH="$PYTHONPATH:/Users/Onwukike/Magnetic/horton"
-#export PYTHONPATH="$PYTHONPATH:/Users/Onwukike/Magnetic/qwobl/lib/python/"
-
-export WORKON_HOME=$HOME/.virtualenvs
-export JAVA_HOME=`/usr/libexec/java_home -v 1.7`
-export ECLIPSE_HOME=$HOME/.eclipse
-export VIRTUALENV_USE_SETUPTOOLS=true
-export PIP_VIRTUALENV_BASE=$WORKON_HOME
-source /Library/Frameworks/Python.framework/Versions/2.7/bin/virtualenvwrapper.sh
-
-alias pypath="env | grep PYTHONPATH"
-alias path="echo $PATH"
-alias recent="ls -lrt | tail"
-alias cleanpyc="find . -name '*.pyc' -exec rm -rf {} \;"
-alias vimrc="vim ~/.vimrc"
-alias zrc="vim ~/.zshrc"
-alias ctags="/usr/local/Cellar/ctags/5.8/bin/ctags"
+export GOROOT=/usr/local/opt/go/libexec
+export GOPATH=~/golang
+# export GOPATH=$GOPATH:~/golang/src/code.uber.internal/infra/statsdex/Godeps/_workspace
+export PATH=$PATH:$GOPATH/bin:/bin:$GOROOT/bin:$HOME/bin
+#export PATH=$PATH:$GOPATH/bin:$GOROOT/bin:$HOME/bin
 
 
-#Kerrit sub coomands
-alias kpc="kerrit projects clone"
-alias kpl="kerrit projects list"
-alias krs="kerrit reviews send"
-
-# Helps to speed up auto completion for zsh
-zstyle ":completion:*" accept-exact "*(N)"
-zstyle ":completion:*" use-cache on
-zstyle ":completion:*" cache-path !/.zsh/cache
-
-PATH=$HOME/.rvm/bin:$PATH # Add RVM to PATH for scripting
 source $ZSH/oh-my-zsh.sh
 
+# You may need to manually set your language environment
+# export LANG=en_US.UTF-8
 
+# Preferred editor for local and remote sessions
+# if [[ -n $SSH_CONNECTION ]]; then
+#   export EDITOR='vim'
+# else
+#   export EDITOR='mvim'
+# fi
+
+# Compilation flags
+# export ARCHFLAGS="-arch x86_64"
+
+# ssh
+# export SSH_KEY_PATH="~/.ssh/dsa_id"
+
+# Set personal aliases, overriding those provided by oh-my-zsh libs,
+# plugins, and themes. Aliases can be placed here, though oh-my-zsh
+# users are encouraged to define aliases within the ZSH_CUSTOM folder.
+# For a full list of active aliases, run `alias`.
+#
+# Example aliases
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
+bindkey -v
+bindkey "^R" history-incremental-search-backward
+
+alias dm="docker-machine"
+alias docker-stop-all="docker stop $(docker ps -a -q)"
+alias docker-rm-all="docker rm $(docker rm -a -q)"
+
+# added by newengsetup
+
+export EDITOR=vim
+export UBER_HOME="$HOME/Uber"
+export UBER_OWNER="oibe@uber.com"
+export UBER_LDAP_UID="oibe"
+export VAGRANT_DEFAULT_PROVIDER=aws
+
+[ -s "/usr/local/bin/virtualenvwrapper.sh" ] && . /usr/local/bin/virtualenvwrapper.sh
+[ -s "$HOME/.nvm/nvm.sh" ] && . $HOME/.nvm/nvm.sh
+
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+
+cdsync () {
+    cd $(boxer sync_dir $@)
+}
+editsync () {
+    $EDITOR $(boxer sync_dir $@)
+}
+opensync () {
+    open $(boxer sync_dir $@)
+}
+
+# end added by newengsetup
+
+########
+## autojump
+#########
+[[ -s /Users/onwukikeibe/.autojump/etc/profile.d/autojump.sh ]] && source /Users/onwukikeibe/.autojump/etc/profile.d/autojump.sh
+autoload -U compinit && compinit -u
+alias china='ssh-agent bash --rcfile ~/.ssh/china/.bash_profile.cn'
+
+
+DISABLE_AUTO_TITLE="true"
+function name() {
+    echo -ne "\e]1;$@\a"
+}
+
+# boot2docker init : this command says how to find the daemon
+$(boot2docker shellinit 2> /dev/null)
+
+# added by travis gem
+[ -f /Users/onwukikeibe/.travis/travis.sh ] && source /Users/onwukikeibe/.travis/travis.sh
+###-begin-npm-completion-###
+#
+# npm command completion script
+#
+# Installation: npm completion >> ~/.bashrc  (or ~/.zshrc)
+# Or, maybe: npm completion > /usr/local/etc/bash_completion.d/npm
+#
+
+if type complete &>/dev/null; then
+  _npm_completion () {
+    local words cword
+    if type _get_comp_words_by_ref &>/dev/null; then
+      _get_comp_words_by_ref -n = -n @ -w words -i cword
+    else
+      cword="$COMP_CWORD"
+      words=("${COMP_WORDS[@]}")
+    fi
+
+    local si="$IFS"
+    IFS=$'\n' COMPREPLY=($(COMP_CWORD="$cword" \
+                           COMP_LINE="$COMP_LINE" \
+                           COMP_POINT="$COMP_POINT" \
+                           npm completion -- "${words[@]}" \
+                           2>/dev/null)) || return $?
+    IFS="$si"
+  }
+  complete -o default -F _npm_completion npm
+elif type compdef &>/dev/null; then
+  _npm_completion() {
+    local si=$IFS
+    compadd -- $(COMP_CWORD=$((CURRENT-1)) \
+                 COMP_LINE=$BUFFER \
+                 COMP_POINT=0 \
+                 npm completion -- "${words[@]}" \
+                 2>/dev/null)
+    IFS=$si
+  }
+  compdef _npm_completion npm
+elif type compctl &>/dev/null; then
+  _npm_completion () {
+    local cword line point words si
+    read -Ac words
+    read -cn cword
+    let cword-=1
+    read -l line
+    read -ln point
+    si="$IFS"
+    IFS=$'\n' reply=($(COMP_CWORD="$cword" \
+                       COMP_LINE="$line" \
+                       COMP_POINT="$point" \
+                       npm completion -- "${words[@]}" \
+                       2>/dev/null)) || return $?
+    IFS="$si"
+  }
+  compctl -K _npm_completion npm
+fi
+###-end-npm-completion-###
+###-begin-npm-completion-###
+#
+# npm command completion script
+#
+# Installation: npm completion >> ~/.bashrc  (or ~/.zshrc)
+# Or, maybe: npm completion > /usr/local/etc/bash_completion.d/npm
+#
+
+if type complete &>/dev/null; then
+  _npm_completion () {
+    local words cword
+    if type _get_comp_words_by_ref &>/dev/null; then
+      _get_comp_words_by_ref -n = -n @ -w words -i cword
+    else
+      cword="$COMP_CWORD"
+      words=("${COMP_WORDS[@]}")
+    fi
+
+    local si="$IFS"
+    IFS=$'\n' COMPREPLY=($(COMP_CWORD="$cword" \
+                           COMP_LINE="$COMP_LINE" \
+                           COMP_POINT="$COMP_POINT" \
+                           npm completion -- "${words[@]}" \
+                           2>/dev/null)) || return $?
+    IFS="$si"
+  }
+  complete -o default -F _npm_completion npm
+elif type compdef &>/dev/null; then
+  _npm_completion() {
+    local si=$IFS
+    compadd -- $(COMP_CWORD=$((CURRENT-1)) \
+                 COMP_LINE=$BUFFER \
+                 COMP_POINT=0 \
+                 npm completion -- "${words[@]}" \
+                 2>/dev/null)
+    IFS=$si
+  }
+  compdef _npm_completion npm
+elif type compctl &>/dev/null; then
+  _npm_completion () {
+    local cword line point words si
+    read -Ac words
+    read -cn cword
+    let cword-=1
+    read -l line
+    read -ln point
+    si="$IFS"
+    IFS=$'\n' reply=($(COMP_CWORD="$cword" \
+                       COMP_LINE="$line" \
+                       COMP_POINT="$point" \
+                       npm completion -- "${words[@]}" \
+                       2>/dev/null)) || return $?
+    IFS="$si"
+  }
+  compctl -K _npm_completion npm
+fi
+###-end-npm-completion-###
+
+# direnv needs this
+eval "$(direnv hook zsh)"

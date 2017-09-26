@@ -107,13 +107,29 @@ map <right> <nop>
 " because :qa hurts my pinky
 map mm <Esc>:qa<Return>
 
+" change directory to current window's file
+map <leader>cd :lcd %:p:h<CR>
+map <leader>o :Explore<CR>
 map <leader>tl :TlistToggle<CR>
+map <leader>r :redraw!<CR>
 
 " saves by hitting s in command mode
 nmap s :w<cr>
 
 " When I hit y in visual-mode it copies to the system buffer
 vmap y :w !pbcopy<CR><CR>
+
+" ================
+" :    Vim-Go     :
+" ================
+let g:syntastic_go_checkers = ['go', 'golint', 'govet', 'errcheck']
+
+" Allows me to use 'go' checker only after <leader>s, so it doesn't 
+" check everytime I save.
+let g:syntastic_mode_map={'mode': 'passive'}
+let g:syntastic_always_populate_loc_list=1
+let g:syntastic_check_on_wq=0
+let g:syntastic_auto_loc_list=1
 
 " =================
 " : YouCompleteMe :
@@ -197,6 +213,17 @@ set statusline+=%*
 "let g:syntastic_check_on_wq = 0
 
 " Ctrlp Config
+" In the above example, the first option tells ctrlp to persist the cache in the configured location, 
+" so when you launch vim again, it will read from there and load the cache (much faster).
+"The second option configures ctrlp to use ag (the_silver_searcher) instead of vim's native globpath() 
+"apis to search for files, this will drastically improve it's scanning speed, if you don't want to use ag, 
+"you can even use plain old grep and it still should be significantly faster. Check :h 'g:ctrlp_user_command' 
+"for more details.
+let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
+if executable('ag')
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+endif
+
 let g:ctrlp_map = '<S-p>'
 let g:ctrlp_cmt = 'CtrlP'
 let g:ctrlp_working_path_mode = 2          " CtrlP: use the nearest ancestor that contains one of these directories or files: .git/ .hg/ .svn/ .bzr/ _darcs/
@@ -323,7 +350,6 @@ syntax on " syntax highlighting
 " ==============
 " :   GOLANG   :
 " ==============
-let g:syntastic_go_checkers = ['govet', 'errcheck', 'go']
 
 """"""""""""""""
 "    RUBY    "
@@ -429,3 +455,4 @@ set backspace=indent,eol,start
     "noremap <silent> ,cu :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>
 " augroup END
 "
+let g:go_fmt_autosave = 0

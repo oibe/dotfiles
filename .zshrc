@@ -11,6 +11,8 @@ ulimit -n 2560
 ZSH_THEME="sporty_256"
 
 bindkey -v
+# needed since Sierra (mac 10.12)
+bindkey \\C-R history-incremental-search-backward
 
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
@@ -66,7 +68,7 @@ export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 export GOROOT=/usr/local/opt/go/libexec
 export GOPATH=~/golang
 # export GOPATH=$GOPATH:~/golang/src/code.uber.internal/infra/statsdex/Godeps/_workspace
-export PATH=$PATH:$GOPATH/bin:/bin:$GOROOT/bin:$HOME/bin
+export PATH=$PATH:$GOPATH/bin:$GOPATH/bin/FlameGraph:/bin:$GOROOT/bin:$HOME/bin
 #export PATH=$PATH:$GOPATH/bin:$GOROOT/bin:$HOME/bin
 
 
@@ -102,6 +104,8 @@ bindkey "^R" history-incremental-search-backward
 alias dm="docker-machine"
 alias docker-stop-all="docker stop $(docker ps -a -q)"
 alias docker-rm-all="docker rm $(docker rm -a -q)"
+alias vim="nvim"
+alias vi="nvim"
 
 # added by newengsetup
 
@@ -131,9 +135,10 @@ opensync () {
 ########
 ## autojump
 #########
-[[ -s /Users/onwukikeibe/.autojump/etc/profile.d/autojump.sh ]] && source /Users/onwukikeibe/.autojump/etc/profile.d/autojump.sh
+[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
 autoload -U compinit && compinit -u
 alias china='ssh-agent bash --rcfile ~/.ssh/china/.bash_profile.cn'
+alias gn='geeknote'
 
 
 DISABLE_AUTO_TITLE="true"

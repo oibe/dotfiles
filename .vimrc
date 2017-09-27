@@ -350,6 +350,8 @@ syntax on " syntax highlighting
 " ==============
 " :   GOLANG   :
 " ==============
+let g:go_fmt_command = "goimports"
+
 
 """"""""""""""""
 "    RUBY    "
@@ -455,4 +457,4 @@ set backspace=indent,eol,start
     "noremap <silent> ,cu :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>
 " augroup END
 "
-let g:go_fmt_autosave = 0
+let g:go_fmt_autosave = 1

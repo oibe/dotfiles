@@ -1,5 +1,8 @@
 #!/bin/bash
 
+ARG1=${1:-foo}
+
+
 # print out commands as they are executed
 set -v
 
